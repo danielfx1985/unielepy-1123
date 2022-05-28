@@ -22,8 +22,8 @@
 	@import '@/uni_modules/uni-scss/index.scss';
 	@import "@/uni_modules/uview-ui/index.scss";  
 	/* #ifndef APP-NVUE */
-	@import '@/static/customicons.css';
-	@import '@/static/css/css.css';
+	@import '@/static/unielepystatic/customicons.css';
+	@import '@/static/unielepystatic/css/css.css';
 	// 设置整个项目的背景色
 	page {
 		background-color: #f5f5f5;

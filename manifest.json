@@ -96,5 +96,13 @@
         "usingComponents" : true,
         "permission" : {}
     },
-    "vueVersion" : "2"
+    "vueVersion" : "2",
+    "h5" : {
+        "title" : "unielepy",
+        "router" : {
+            "mode" : "hash",
+            "base" : "/" // 注意此处的base 并不是给访问的路由增加前缀的 和下面的publicPath 要区分开
+        },
+        "publicPath" : "/" // 此处的单站点直接设置为 `/` 就行
+    }
 }

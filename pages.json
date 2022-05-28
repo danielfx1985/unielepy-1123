@@ -28,8 +28,8 @@
 			"list":[
 				{
 					"pagePath":"pages/index/index",//页面路径
-					"iconPath":"static/img/icon-index-unselect.png",//未选中tab图标路径
-					"selectedIconPath":"static/img/icon-index-select.png",//选中tab图标路径
+					"iconPath":"static/unielepystatic/img/icon-index-unselect.png",//未选中tab图标路径
+					"selectedIconPath":"static/unielepystatic/img/icon-index-select.png",//选中tab图标路径
 					"text":"首页"//tab字体显示
 				}
 			]

@@ -24,9 +24,9 @@
 				interval: 5000,
 				duration: 500,
 				swiperDatas:[
-					{id:1,image:'../../static/logo.png',link:'https://www.baidu.com'},
-					{id:2,image:'../../static/logo.png',link:'https://www.baidu.com'},
-					{id:3,image:'../../static/logo.png',link:'https://www.baidu.com'},
+					{id:1,image:'../../static/unielepystatic/logo.png',link:'https://www.baidu.com'},
+					{id:2,image:'../../static/unielepystatic/logo.png',link:'https://www.baidu.com'},
+					{id:3,image:'../../static/unielepystatic/logo.png',link:'https://www.baidu.com'},
 				],//轮播图
 				formInline:{
 					page:1,
