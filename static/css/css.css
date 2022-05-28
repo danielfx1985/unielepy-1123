@@ -1,0 +1,13 @@
+/* 
+*custom css
+*lybbn-uniapp-----django-vue-lyadmin---django-vue3-lyadmin 
+*/
+*{
+	margin:0;
+	padding: 0;
+}
+.container{
+	/* height:100vh; */
+	overflow: auto;
+	box-sizing: border-box;
+}

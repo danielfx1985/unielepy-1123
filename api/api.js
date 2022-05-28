@@ -1,0 +1,41 @@
+import {ajaxGet,ajaxPost,ajaxDelete,ajaxPut,ajaxPatch,chooseUploadImg,uploadImg} from './request';
+// 用户微信手机号登录
+export const xcxMobilelogin = params => ajaxPost({url: `xcx/mobilelogin/`,params})
+
+// 获取轮播图
+export const getRotationimgs = params => ajaxGet({url: `xcx/getrotationimgs/`,params})
+
+// 获取其他设置
+export const getOtherSettings = params => ajaxGet({url: `xcx/getothersettings/`,params})
+
+// 消息列表
+export const xcxUsermessages = params => ajaxGet({url: `xcx/usermessages/`,params})
+
+// 消息列表删除/已读
+export const xcxUsermessagesOperate = params => ajaxPost({url: `xcx/usermessages/`,params})
+
+// 平台公告
+export const xcxUsermessagesnotice = params => ajaxGet({url: `xcx/usermessagesnotice/`,params})
+
+// 选择并图像上传
+export const xcxChooseUploadimage = params => chooseUploadImg({url: `xcx/uploadimage/`,params})
+
+// 直接图像上传
+export const uploadImage = params => uploadImg({url: `xcx/uploadimage/`,params})
+
+// 提交意见反馈
+export const xcxFeeckbackAdd = params => ajaxPost({url: `xcx/feeckback/`,params})
+
+//我的地址-获取我的地址列表
+export const getAddresslist = params => ajaxGet({url: `xcx/getaddress/`,params})
+
+//我的地址-删除地址
+export const delAddress = params => ajaxGet({url: `xcx/deladdress/`,params})
+
+//我的地址-设置为默认地址
+export const setdefaultAddress = params => ajaxPost({url: `xcx/setdefaultaddress/`,params})
+
+//我的地址-新增地址\编辑地址
+export const addeditAddress = params => ajaxPost({url: `xcx/addeditaddress/`,params})
+
+
