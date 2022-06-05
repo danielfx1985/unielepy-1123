@@ -21,7 +21,7 @@ export const xcxUsermessagesnotice = params => ajaxGet({url: `xcx/usermessagesno
 export const xcxChooseUploadimage = params => chooseUploadImg({url: `xcx/uploadimage/`,params})
 
 // 直接图像上传
-export const uploadImage = params => uploadImg({url: `xcx/uploadimage/`,params})
+export const uploadImage = params => uploadImg({url: `app/uploadimage/`,params})
 
 // 提交意见反馈
 export const xcxFeeckbackAdd = params => ajaxPost({url: `xcx/feeckback/`,params})

@@ -5,9 +5,8 @@ function gettoken(){
 	var token= 'nulltoken'//初始token
 	//普通用户token
 	const tempuserlogininfo = common.getData("nuserlogininfo")
-	console.log(tempuserlogininfo)
 	if (tempuserlogininfo instanceof Object){
-			token = tempuserlogininfo.access
+		token = tempuserlogininfo.access
 	}
 	return token
 }
@@ -190,19 +189,29 @@ export const chooseUploadImg = async (param) => {
 			   		Authorization: "JWT " + token
 			   	},
 				formData: {
-					'uploadimg': "lybbn",
+					'uploadimg': "lybbn-unielepy",
 				},
 			   	name: "file",
 			   	success: res => {
 			   		uni.hideLoading();
-			   		if (res.statusCode == 403) {} else {
+			   		if (res.statusCode == 200){
 			   			var data = res.data ? JSON.parse(res.data) : {};
 			   			if (data.code == 2000) {
 			   				resolve(data)
-			   			} else {
+			   			} else if (data.code == 4001) {
+							uni.showToast({
+								icon:"none",
+								title: '认证信息过期或不正确'
+							});
+						}else {
 							reject('上传失败');
 						}
-			   		}
+			   		}else{
+						uni.showToast({
+							icon:"none",
+							title: '请求错误：'+res.statusCode
+						});
+					}
 			   	},
 			   	fail: res => {
 			   		uni.showToast({
@@ -236,16 +245,28 @@ export const uploadImg = async (param) => {
 				Authorization: "JWT " + token
 			},
 			formData: {
-				'uploadimg': "lybbn",
+				'uploadimg': "lybbn-unielepy",
 			},
 			name: "file",
 			success: res => {
 				// uni.hideLoading();
-				if (res.statusCode == 403) {} else {
+				if (res.statusCode == 200){
 					var data = res.data ? JSON.parse(res.data) : {};
 					if (data.code == 2000) {
 						resolve(data)
-					} else {}
+					}else if (data.code == 4001) {
+						uni.showToast({
+							icon:"none",
+							title: '认证信息过期或不正确'
+						});
+					} else {
+						resolve(data)
+					}
+				}else{
+					uni.showToast({
+						icon:"none",
+						title: '请求错误：'+res.statusCode
+					});
 				}
 			},
 			fail: res => {
