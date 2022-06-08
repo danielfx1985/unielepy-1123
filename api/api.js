@@ -1,4 +1,6 @@
 import {ajaxGet,ajaxPost,ajaxDelete,ajaxPut,ajaxPatch,chooseUploadImg,uploadImg} from './request';
+// app检测更新
+export const upgradeApp = params => ajaxPost({url: `app/checkversion/`,params})
 // 用户微信手机号登录
 export const xcxMobilelogin = params => ajaxPost({url: `xcx/mobilelogin/`,params})
 
