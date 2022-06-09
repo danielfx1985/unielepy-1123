@@ -1,48 +1,51 @@
 import {upgradeApp} from '@/api/api.js'
 const PACKAGE_UPDATE_KEY = '__unielepy_package_update__'
 const PACKAGE_INFO_KEY = '__unielepy_package_info__'
+const is_check_app_upgrade = true //是否检查APP更新
 const is_silently = false //app的wgt更新是否静默安装
-//应用初始化页
+//应用初始化
 // #ifdef APP-PLUS
 plus.screen.lockOrientation('portrait-primary'); //竖屏正方向锁定 
-//热更新
-const updated = uni.getStorageSync(PACKAGE_UPDATE_KEY); // 尝试读取storage
-if (updated.completed === true) {
-	// 如果上次刚更新过
-	// 删除安装包及安装记录
-	console.log('安装记录被删除，更新成功');
-	uni.removeSavedFile({
-		filePath: updated.packgePath,
-		success: res => {
-			uni.removeStorageSync(PACKAGE_UPDATE_KEY);
-		}
-	});
-} else if (updated.completed === false) {
-	uni.removeStorageSync(PACKAGE_UPDATE_KEY);
-	plus.runtime.install(updated.packgePath, {
-		force: true
-	});
-	uni.setStorage({
-		key: PACKAGE_UPDATE_KEY,
-		data: {
-			completed: true,
-			packgePath: updated.packgePath
-		},
-		success: res => {
-			console.log('成功安装上次的更新，应用需要重启才能继续完成');
-		}
-	});
-	uni.showModal({
-		title: '提示',
-		content: '应用将重启以完成更新',
-		showCancel: false,
-		complete: () => {
-			plus.runtime.restart();
-		}
-	});
-}else{
-	// 初始化appVersion（检查当前版本信息并尝试更新--仅app生效）
-	initAppVersion();
+if(is_check_app_upgrade){
+	//热更新
+	const updated = uni.getStorageSync(PACKAGE_UPDATE_KEY); // 尝试读取storage
+	if (updated.completed === true) {
+		// 如果上次刚更新过
+		// 删除安装包及安装记录
+		console.log('安装记录被删除，更新成功');
+		uni.removeSavedFile({
+			filePath: updated.packgePath,
+			success: res => {
+				uni.removeStorageSync(PACKAGE_UPDATE_KEY);
+			}
+		});
+	} else if (updated.completed === false) {
+		uni.removeStorageSync(PACKAGE_UPDATE_KEY);
+		plus.runtime.install(updated.packgePath, {
+			force: true
+		});
+		uni.setStorage({
+			key: PACKAGE_UPDATE_KEY,
+			data: {
+				completed: true,
+				packgePath: updated.packgePath
+			},
+			success: res => {
+				console.log('成功安装上次的更新，应用需要重启才能继续完成');
+			}
+		});
+		uni.showModal({
+			title: '提示',
+			content: '应用将重启以完成更新',
+			showCancel: false,
+			complete: () => {
+				plus.runtime.restart();
+			}
+		});
+	}else{
+		// 初始化appVersion（检查当前版本信息并尝试更新--仅app生效）
+		initAppVersion();
+	}
 }
 // #endif
 
@@ -181,9 +184,6 @@ function checkVersionToUgrade(server_version, current_version,data) {
 					}
 				})
 			}
-		}
-		
-		
 	}
 }
 
