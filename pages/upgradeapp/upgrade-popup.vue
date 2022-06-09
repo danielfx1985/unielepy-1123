@@ -63,7 +63,7 @@
 
 <script>
 	const localFilePathKey = '__localFilePath__'
-	const platform_iOS = 'iOS';
+	const platform_iOS = 'ios';
 	let downloadTask = null;
 
 	/**

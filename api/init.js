@@ -1,54 +1,88 @@
+/*
+*unielepy应用初始化文件
+*author:lybbn
+*source code:https://gitee.com/lybbn/unielepy
+*program:unielepy
+*/
 import {upgradeApp} from '@/api/api.js'
 const PACKAGE_UPDATE_KEY = '__unielepy_package_update__'
 const PACKAGE_INFO_KEY = '__unielepy_package_info__'
-const is_check_app_upgrade = true //是否检查APP更新
+const is_check_app_upgrade = false //是否检查APP更新
 const is_silently = false //app的wgt更新是否静默安装
-//应用初始化
+const is_mandatory = false //app更新是否强制更新
 // #ifdef APP-PLUS
-plus.screen.lockOrientation('portrait-primary'); //竖屏正方向锁定 
-if(is_check_app_upgrade){
-	//热更新
-	const updated = uni.getStorageSync(PACKAGE_UPDATE_KEY); // 尝试读取storage
-	if (updated.completed === true) {
-		// 如果上次刚更新过
-		// 删除安装包及安装记录
-		console.log('安装记录被删除，更新成功');
-		uni.removeSavedFile({
-			filePath: updated.packgePath,
-			success: res => {
-				uni.removeStorageSync(PACKAGE_UPDATE_KEY);
-			}
-		});
-	} else if (updated.completed === false) {
-		uni.removeStorageSync(PACKAGE_UPDATE_KEY);
-		plus.runtime.install(updated.packgePath, {
-			force: true
-		});
-		uni.setStorage({
-			key: PACKAGE_UPDATE_KEY,
-			data: {
-				completed: true,
-				packgePath: updated.packgePath
-			},
-			success: res => {
-				console.log('成功安装上次的更新，应用需要重启才能继续完成');
-			}
-		});
-		uni.showModal({
-			title: '提示',
-			content: '应用将重启以完成更新',
-			showCancel: false,
-			complete: () => {
-				plus.runtime.restart();
-			}
-		});
-	}else{
-		// 初始化appVersion（检查当前版本信息并尝试更新--仅app生效）
-		initAppVersion();
-	}
-}
+import interceptorChooseImage from '@/components/json-interceptor-chooseImage/js_sdk/main.js';
 // #endif
+export default async function() {
+	//应用初始化
+	// #ifdef APP-PLUS
+	plus.screen.lockOrientation('portrait-primary'); //竖屏正方向锁定 
+	if(is_check_app_upgrade){
+		//热更新
+		const updated = uni.getStorageSync(PACKAGE_UPDATE_KEY); // 尝试读取storage
+		console.log("正在检测app版本更新...")
+		if (updated.completed === true) {
+			// 如果上次刚更新过
+			// 删除安装包及安装记录
+			console.log('安装记录被删除，更新成功');
+			uni.removeSavedFile({
+				filePath: updated.packgePath,
+				success: res => {
+					uni.removeStorageSync(PACKAGE_UPDATE_KEY);
+				}
+			});
+		} else if (updated.completed === false) {
+			uni.removeStorageSync(PACKAGE_UPDATE_KEY);
+			plus.runtime.install(updated.packgePath, {
+				force: true
+			});
+			uni.setStorage({
+				key: PACKAGE_UPDATE_KEY,
+				data: {
+					completed: true,
+					packgePath: updated.packgePath
+				},
+				success: res => {
+					console.log('成功安装上次的更新，应用需要重启才能继续完成');
+				}
+			});
+			uni.showModal({
+				title: '提示',
+				content: '应用将重启以完成更新',
+				showCancel: false,
+				complete: () => {
+					plus.runtime.restart();
+				}
+			});
+		}else{
+			// 初始化appVersion（检查当前版本信息并尝试更新--仅app生效）
+			initAppVersion();
+		}
+	}
 
+	// 实现，路由拦截。当应用无访问摄像头/相册权限，引导跳到设置界面
+	interceptorChooseImage()
+
+	// 监听并提示设备网络状态变化
+	uni.onNetworkStatusChange(res => {
+		console.log(res.isConnected);
+		console.log(res.networkType);
+		if (res.networkType != 'none') {
+			uni.showToast({
+				title: '当前网络类型：' + res.networkType,
+				icon: 'none',
+				duration: 3000
+			})
+		} else {
+			uni.showToast({
+				title: '网络类型：' + res.networkType,
+				icon: 'none',
+				duration: 3000
+			})
+		}
+	});
+	// #endif
+}
 /**
  * // 初始化appVersion并尝试更新版本
  */
@@ -56,19 +90,39 @@ function initAppVersion() {
 	// #ifdef APP-PLUS
 	let appid = plus.runtime.appid;
 	plus.runtime.getProperty(appid, (wgtInfo) => {
-		let appVersion = plus.runtime;
-		let currentVersion = appVersion.versionCode > wgtInfo.versionCode ? appVersion.version : wgtInfo.version;
+		let appVersion = plus.runtime;//appVersion.version为基座版本如：13.4.14，wgtInfo.version为app版本号：如1.0.0
+		let currentVersion = wgtInfo.version;
 		getApp().globalData.appVersion = currentVersion
+		let platform = plus.os.name.toLowerCase() === 'android' ? 'android' : 'ios'
 		var formdata = {
 			appid:appid,
 			version:currentVersion,
+			platform:platform,
 		}
 		// 检查服务器端版本号
 		upgradeApp().then(res => {
+			res = {
+				data:{
+					version:'2.0.0',
+					androidWgtUrl:"http://www.lybbn.cn",
+					iosWgtUrl:"http://www.lybbn.cn",
+					wgtUrl:"http://www.lybbn.cn",
+				}
+			}
+			checkVersionToUgrade(res.data.version,currentVersion,res.data)
 			// console.log('检查是否有可以更新的版本', res);
 			if (res.code == 2000) {
 				// 判断是否更新
-				checkVersionToUgrade(res.data.version,currentVersion,res.data)
+				// res = {
+				// 	data:{
+				// 		version:'2.0.0',
+				// 		androidWgtUrl:"http://www.lybbn.cn",
+				// 		iosWgtUrl:"http://www.lybbn.cn",
+				// 	}
+				// }
+				// checkVersionToUgrade(res.data.version,currentVersion,res.data)
+			}else{
+				console.log("获取app版本信息失败")
 			}
 		})
 	});
@@ -82,108 +136,52 @@ function initAppVersion() {
  * @param {Object} current_version 当前应用的版本号
  * @param {Object} data 服务器返回的数据
  */
-function checkVersionToUgrade(server_version, current_version,data) {
+function checkVersionToUgrade(server_version, current_version,res) {
 	//如果有更新
-	if(compare(server_version,current_version)){
-		let downloadLink = ''
-		let androidLink = res.androidWgtUrl
-		let iosLink = res.iosWgtUrl
-		let ready = false
-		let platform = plus.os.name.toLowerCase() === 'android' ? 'android' : 'ios'
-		if (res.wgtUrl.match(RegExp(/.wgt/))) {
-			// 判断系统类型
-			if (platform === 'android') {
-				console.log('安卓系统');
-				if (androidLink && androidLink !== '#') {
-					// 我这里默认#也是没有地址，请根据业务自行修改
-					console.log('发现下载地址');
-					// 安卓：创建下载任务
-					if (androidLink.match(RegExp(/.wgt/))) {
-						console.log('确认wgt热更新包');
-						downloadLink = androidLink;
-						ready = true;
-					} else {
-						console.log('安卓推荐.wgt强制更新，.apk的强制更新请您自行修改程序');
+	const has_new = compare(server_version,current_version)
+	if(has_new==1){
+		//服务器返回更新内容
+		const upgrade_result = {
+			title:"升级标题", // 标题
+			contents:"升级内容", // 升级内容
+			is_mandatory:true, // 是否强制更新
+			url:"http://www.lybbn.cn", // 安装包下载地址
+			platform:"android", // 安装包平台
+			type:"wgt", // 安装包类型
+		}
+		// 静默更新，只有wgt有
+		if (is_silently) {
+			uni.downloadFile({
+				url: upgrade_result.url,
+				success: res => {
+					if (res.statusCode == 200) {
+						// 下载好直接安装，下次启动生效
+						plus.runtime.install(res.tempFilePath, {
+							force: false
+						});
 					}
-				} else {
-					console.log('下载地址是空的，无法继续');
 				}
-			}else{
-				console.log('苹果系统');
-				if (iosLink && iosLink !== '#') {
-					// 我这里默认#也是没有地址，请根据业务自行修改
-					console.log('发现下载地址');
-					// 苹果(A)：进行热更新（如果iosLink是wgt更新包的下载地址）判断文件名中是否含有.wgt
-					if (iosLink.match(RegExp(/.wgt/))) {
-						console.log('确认wgt热更新包');
-						downloadLink = iosLink;
-						ready = true;
-					} else {
-						console.log('苹果只支持.wgt强制更新');
-					}
-				} else {
-					console.log('下载地址是空的，无法继续');
-				}
+			});
+			return;
+		}
+		/**
+		 * 提示升级一
+		 * 使用 uni.showModal
+		 */
+		// return updateUseModal(upgrade_result)
+		/**
+		 * 提示升级二
+		 * 官方适配的升级弹窗，可自行替换资源适配UI风格
+		 */
+		uni.setStorageSync(PACKAGE_INFO_KEY, upgrade_result)
+		uni.navigateTo({
+			url: `/pages/upgradeapp/upgrade-popup?local_storage_key=${PACKAGE_INFO_KEY}`,
+			fail: (err) => {
+				console.error('更新弹框跳转失败', err)
+				uni.removeStorageSync(PACKAGE_INFO_KEY)
 			}
-			if (ready) {
-				console.log('任务开始')
-				let downloadTask = uni.downloadFile({
-					url: downloadLink,
-					success: res => {
-						if (res.statusCode === 200) {
-							// 静默更新，只有wgt有
-							if (is_silently) {
-								// 下载好直接安装，下次启动生效
-								plus.runtime.install(res.tempFilePath, {
-									force: false
-								});
-								// 任务完成，关闭下载任务
-								console.log('任务完成，关闭下载任务');
-								downloadTask.abort();
-								downloadTask = null;
-								return
-							}else{
-								// 保存下载的安装包(非静默安装，下次启动安装)
-								console.log('保存安装包');
-								uni.saveFile({
-									tempFilePath: res.tempFilePath,
-									success: res => {
-										const packgePath = res.savedFilePath;
-										// 保存更新记录到stroage，下次启动app时安装更新
-										uni.setStorage({
-											key: PACKAGE_UPDATE_KEY,
-											data: {
-												completed: false,
-												packgePath: packgePath
-											},
-											success: () => {
-												console.log('成功保存记录');
-											}
-										});
-										// 任务完成，关闭下载任务
-										console.log('任务完成，关闭下载任务，下一次启动应用时将安装更新');
-										downloadTask.abort();
-										downloadTask = null;
-									}
-								});
-							}
-						}
-					}
-				});
-			} else {
-				console.log('下载地址未准备，无法开启下载任务');
-				}
-				
-			}else{//完整包更新
-				uni.setStorageSync(PACKAGE_INFO_KEY, data)
-				uni.navigateTo({
-					url: `../components/ly-upgrade-app/upgrade-popup?local_storage_key=${PACKAGE_INFO_KEY}`,
-					fail: (err) => {
-						console.error('更新弹框跳转失败', err)
-						uni.removeStorageSync(PACKAGE_INFO_KEY)
-					}
-				})
-			}
+		})
+		
 	}
 }
 
@@ -226,6 +224,81 @@ function compare(v1 = '0', v2 = '0') {
 			}
 		}
 	}
-
 	return result;
+}
+
+/**
+ * 使用 uni.showModal 升级
+ */
+function updateUseModal(packageInfo) {
+	const {
+		title, // 标题
+		contents, // 升级内容
+		is_mandatory, // 是否强制更新
+		url, // 安装包下载地址
+		platform, // 安装包平台
+		type // 安装包类型
+	} = packageInfo;
+
+	let isWGT = type === 'wgt'
+	let isiOS = !isWGT ? platform.includes('ios') : false;
+	let confirmText = isiOS ? '立即跳转更新' : '立即下载更新'
+
+	return uni.showModal({
+		title,
+		content: contents,
+		showCancel: !is_mandatory,
+		confirmText,
+		success: res => {
+			if (res.cancel) return;
+
+			// 安装包下载
+			if (isiOS) {
+				plus.runtime.openURL(url);
+				return;
+			}
+
+			uni.showToast({
+				title: '后台下载中……',
+				duration: 1000
+			});
+
+			// wgt 和 安卓下载更新
+			downloadTask = uni.downloadFile({
+				url,
+				success: res => {
+					if (res.statusCode !== 200) {
+						console.error('下载安装包失败', err);
+						return;
+					}
+					// 下载好直接安装，下次启动生效
+					plus.runtime.install(res.tempFilePath, {
+						force: false
+					}, () => {
+						if (is_mandatory) {
+							//更新完重启app
+							plus.runtime.restart();
+							return;
+						}
+						uni.showModal({
+							title: '安装成功是否重启？',
+							success: res => {
+								if (res.confirm) {
+									//更新完重启app
+									plus.runtime.restart();
+								}
+							}
+						});
+					}, err => {
+						uni.showModal({
+							title: '更新失败',
+							content: err
+								.message,
+							showCancel: false
+						});
+					});
+				}
+			});
+		}
+	});
 }

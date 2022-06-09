@@ -317,11 +317,11 @@ module.exports = {
 				if (res.statusCode === 200) {
 					var temppath = res.tempFilePath;
 					var suffix = url.split(".")[url.split(".").length - 1];//获取地址后缀
-					var ext = url.substring(url.length - 3);
+					var ext = url.substring(url.length - 3);//对于有4位后缀的文件不准
 					//判断是否为（图片或视频）
-					if(ext == "MP4" || ext == "mp4" ||ext == "flv" ||ext == "FLV" || ext == "jpg"  ||ext == "JPG" || ext == "png" ||ext == "jpeg" || ext == "PNG"||ext == "gif"||ext == "GIF"){
+					if(suffix == "MP4" || suffix == "mp4" ||suffix == "flv" ||suffix == "FLV" || suffix == "jpg"  ||suffix == "JPG" || suffix == "png" ||suffix == "jpeg" || suffix == "PNG"||suffix == "gif"||suffix == "GIF"){
 						//视频
-						if(ext == "MP4" || ext == "mp4" ||ext == "flv" ||ext == "FLV"){
+						if(suffix == "MP4" || suffix == "mp4" ||suffix == "flv" ||suffix == "FLV"){
 							this.showLoading("正在保存中")
 							uni.saveVideoToPhotosAlbum({
 								filePath: temppath,

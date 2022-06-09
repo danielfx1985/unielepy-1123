@@ -7,7 +7,7 @@
 			appVersion: "",//当前app版本号
 		},
 		onLaunch: function() {
-			console.warn('unielepy已启动')
+			console.log('unielepy已启动')
 			console.log('App Launch')
 			initApp()
 		},

@@ -8,6 +8,22 @@
 			"navigationBarTextStyle":"black"
 			// "navigationStyle": "custom" // 隐藏系统导航栏
 			}
+		},
+		{
+		"path": "pages/upgradeapp/upgrade-popup",//app检查更新提示
+		"style": {
+			"disableScroll": true,
+			"app-plus": {
+				"backgroundColorTop": "transparent",
+				"background": "transparent",
+				"titleNView": false,
+				"scrollIndicator": false,
+				"popGesture": "none",
+				"animationType": "fade-in",
+				"animationDuration": 200
+		
+				}
+			}
 		}
 		
 	],
