@@ -4,6 +4,9 @@ export const upgradeApp = params => ajaxPost({url: `app/checkversion/`,params})
 // 用户微信手机号登录
 export const xcxMobilelogin = params => ajaxPost({url: `xcx/mobilelogin/`,params})
 
+//发送短信验证码
+export const sendSMS = params => ajaxPost({url: `xcx/sendsms/`,params})
+
 // 获取轮播图
 export const getRotationimgs = params => ajaxGet({url: `xcx/getrotationimgs/`,params})
 

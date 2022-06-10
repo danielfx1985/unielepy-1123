@@ -24,6 +24,19 @@
 		
 				}
 			}
+		},
+		{
+		"path": "pages/invite/invite",
+		"style": {
+			"navigationStyle": "custom",
+			"enablePullDownRefresh": false
+			}
+		},
+		{
+		"path": "pages/login/pwd-reset/pwd-reset",
+		"style": {
+			"navigationBarTitleText": "重置密码"
+			}
 		}
 		
 	],
