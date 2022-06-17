@@ -12,7 +12,7 @@ unielepy 框架是使用uniapp配套django-vue-lyadmin使用的快速开发框�
 
 ## 项目优点
 
-具备丰富的页面模板(模板/组件内容更新中....)、可轻松的与[django-vue-lyadmin](https://gitee.com/lybbn/django-vue-lyadmin)、[django-vue-lyadmin](https://gitee.com/lybbn/django-vue-lyadmin)平台接口对接
+具备丰富的页面模板(模板/组件内容更新中....)、可轻松的与[django-vue-lyadmin](https://gitee.com/lybbn/django-vue-lyadmin)、[django-vue3-lyadmin](https://gitee.com/lybbn/django-vue3-lyadmin)平台接口对接
 
 ## 在线体验
 
