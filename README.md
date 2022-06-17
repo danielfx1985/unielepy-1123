@@ -4,7 +4,7 @@
 
 unielepy 框架是使用uniapp配套django-vue-lyadmin使用的快速开发框架。内置APP升级检测、通用方法与请求、组件等封装,使用本框架可以轻松的结合[django-vue-lyadmin](https://gitee.com/lybbn/django-vue-lyadmin)/[django-vue3-lyadmin](https://gitee.com/lybbn/django-vue3-lyadmin)开发一套前后端分离的前端app、h5、小程序等应用
 
-本项目的实现目标是，挑选自己想要的页面模板进行低代码或零代码的形式就可轻松的实现手机端、H5端、小程序端的开发工作。(模板/组件内容更新中....)
+本项目的实现目标是，通过eleunipy系统挑选自己想要的页面模板/组件/源码进行低代码或零代码的形式就可轻松的实现手机端、H5端、小程序端的开发工作。(模板/组件内容更新中....)
 
 终极目标是让非开发人员也可轻松上手的一个项目（选定模板/组件/成品代码导入功能、详细功能文档指导代码位置操作...开发中...）。
 
@@ -16,9 +16,9 @@ unielepy 框架是使用uniapp配套django-vue-lyadmin使用的快速开发框�
 
 ## 在线体验
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  Eleunipy在线模板系统：[https://eleunipy.lybbn.cn/](https://eleunipy.lybbn.cn/)
+
+插件/组件/源码 陆续更新中...
 
 ## 文档地址
 
