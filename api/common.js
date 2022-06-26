@@ -263,6 +263,28 @@ module.exports = {
 		return true;
 	},
 	/**
+	 * 是否车牌号
+	 */
+	checkCarNo(value) {
+		// 新能源车牌
+		const xreg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF]$)|([DF][A-HJ-NP-Z0-9][0-9]{4}$))/
+		// 旧车牌
+		const creg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/
+		if (value.length === 7) {
+			return creg.test(value)
+		} if (value.length === 8) {
+			return xreg.test(value)
+		}
+		return false
+	},
+	/**
+	 * 金额,只允许2位小数
+	 */
+	checkAmount(value) {
+		// 金额，只允许保留两位小数
+		return /^[1-9]\d*(,\d{3})*(\.\d{1,2})?$|^0\.\d{1,2}$/.test(value)
+	},
+	/**
 	 * 商城详情商品选择
 	 * 参数：obj商品详情的数据的对象，selectArray选择的规格值id数组['1','2','3']
 	 * 返回选择的sku信息
