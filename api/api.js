@@ -31,6 +31,9 @@ export const uploadImage = params => uploadImg({url: `app/uploadimage/`,params})
 // 提交意见反馈
 export const xcxFeeckbackAdd = params => ajaxPost({url: `xcx/feeckback/`,params})
 
+//我的地址-获取省市区所有数据
+export const getProvinceAreaAllList = params => ajaxGet({url: `app/getallareaslist/`,params})
+
 //我的地址-获取我的地址列表
 export const getAddresslist = params => ajaxGet({url: `xcx/getaddress/`,params})
 
