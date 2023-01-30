@@ -9,7 +9,7 @@
 					<text class="arrow down" :class="{ active: descending }" @click.stop="descendingFn"></text>
 				</view>
 			</view>
-			<dropdown v-if="filterType || filterData.length" :filterData="filterData" :filterType="filterType" @change="ondropdown"></dropdown>
+			<dropdown v-if="filterType || filterData.length" :filterDefaultValue="filterDefaultValue" :filterData="filterData" :filterType="filterType" @change="ondropdown"></dropdown>
 		</view>
 	</th>
 	<!-- #endif -->
@@ -19,7 +19,9 @@
 </template>
 
 <script>
+	// #ifdef H5
 	import dropdown from './filter-dropdown.vue'
+	// #endif
 /**
  * Th 表头
  * @description 表格内的表头单元格组件
@@ -42,7 +44,9 @@ export default {
 		virtualHost: true
 	},
 	components: {
+		// #ifdef H5
 		dropdown
+		// #endif
 	},
 	emits:['sort-change','filter-change'],
 	props: {
@@ -74,6 +78,12 @@ export default {
 			type: Array,
 			default () {
 				return []
+			}
+		},
+		filterDefaultValue: {
+			type: [Array,String],
+			default () {
+				return ""
 			}
 		}
 	},
@@ -196,6 +206,7 @@ export default {
 
 <style lang="scss">
 $border-color: #ebeef5;
+$uni-primary: #007aff !default;
 
 .uni-table-th {
 	padding: 12px 10px;
@@ -250,7 +261,7 @@ $border-color: #ebeef5;
 	}
 	&.active {
 		::after {
-			background-color: #007aff;
+			background-color: $uni-primary;
 		}
 	}
 }
@@ -267,7 +278,7 @@ $border-color: #ebeef5;
 	}
 	&.active {
 		::after {
-			background-color: #007aff;
+			background-color: $uni-primary;
 		}
 	}
 }

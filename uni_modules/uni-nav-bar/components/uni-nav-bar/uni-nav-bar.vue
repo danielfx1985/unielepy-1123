@@ -1,7 +1,7 @@
 <template>
-	<view class="uni-navbar" :class="{'uni-dark':dark}">
-		<view :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }"
-			:style="{ 'background-color': themeBgColor }" class="uni-navbar__content">
+	<view class="uni-navbar" :class="{'uni-dark':dark, 'uni-nvue-fixed': fixed}">
+		<view class="uni-navbar__content" :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }"
+			:style="{ 'background-color': themeBgColor }" >
 			<status-bar v-if="statusBar" />
 			<view :style="{ color: themeColor,backgroundColor: themeBgColor ,height:navbarHeight}"
 				class="uni-navbar__header">
@@ -38,10 +38,12 @@
 				</view>
 			</view>
 		</view>
+		<!-- #ifndef APP-NVUE -->
 		<view class="uni-navbar__placeholder" v-if="fixed">
 			<status-bar v-if="statusBar" />
 			<view class="uni-navbar__placeholder-view" :style="{ height:navbarHeight}" />
 		</view>
+		<!-- #endif -->
 	</view>
 </template>
 
@@ -50,6 +52,8 @@
 	const getVal = (val) => typeof val === 'number' ? val + 'px' : val;
 
 	/**
+	 * 
+	 * 
 	 * NavBar 自定义导航栏
 	 * @description 导航栏组件，主要用于头部导航
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=52
@@ -64,6 +68,7 @@
 	 * @property {Boolean} fixed = [true|false] 是否固定顶部
 	 * @property {Boolean} statusBar = [true|false] 是否包含状态栏
 	 * @property {Boolean} shadow = [true|false] 导航栏下是否有阴影
+	 * @property {Boolean} stat 是否开启统计标题上报
 	 * @event {Function} clickLeft 左侧按钮点击时触发
 	 * @event {Function} clickRight 右侧按钮点击时触发
 	 * @event {Function} clickTitle 中间标题点击时触发
@@ -135,6 +140,10 @@
 				type: [Number, String],
 				default: 60
 			},
+			stat: {
+				type: [Boolean, String],
+				default: ''
+			}
 		},
 		computed: {
 			themeBgColor() {
@@ -170,7 +179,7 @@
 			}
 		},
 		mounted() {
-			if (uni.report && this.title !== '') {
+			if (uni.report && this.stat && this.title !== '') {
 				uni.report('title', this.title)
 			}
 		},
@@ -191,6 +200,11 @@
 <style lang="scss" scoped>
 	$nav-height: 44px;
 
+	.uni-nvue-fixed {
+		/* #ifdef APP-NVUE */
+		position: sticky;
+		/* #endif */
+	}
 	.uni-navbar {
 		// box-sizing: border-box;
 	}
