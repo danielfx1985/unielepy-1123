@@ -1,31 +1,27 @@
 <template>
 	<view class="content">
-		<!-- 顶部文字 -->
-		<!-- 登录框 (选择手机号所属国家和地区需要另行实现) -->
-		<uni-forms ref="form" :value="formData" :rules="rules">
-			<uni-forms-item name="phone">
-				<!-- focus规则如果上一页携带来“手机号码”数据就focus验证码输入框，否则focus手机号码输入框 -->
-				<uni-easyinput :disabled="lock" :focus="formData.phone.length!=11" type="number" class="easyinput" :inputBorder="false"
-					v-model="formData.phone" maxlength="11" placeholder="请输入手机号"></uni-easyinput>
-			</uni-forms-item>
-			<uni-forms-item name="code">
-				<uni-easyinput :focus="formData.phone.length==11" type="number" class="easyinput" :inputBorder="false"
-					v-model="formData.code" maxlength="6" placeholder="请输入验证码">
-					<template v-slot:right>
-						<lysendsmscode ref="shortCode" :phone="formData.phone"></lysendsmscode>
-					</template>
-				</uni-easyinput>
-			</uni-forms-item>
-			<uni-forms-item name="pwd">
-				<uni-easyinput type="password" class="easyinput" :inputBorder="false" v-model="formData.pwd"
-					placeholder="请输入新密码"></uni-easyinput>
-			</uni-forms-item>
-			<uni-forms-item name="pwd2">
-				<uni-easyinput type="password" class="easyinput" :inputBorder="false" v-model="formData.pwd2"
-					placeholder="请确认新密码"></uni-easyinput>
-			</uni-forms-item>
-			<button class="send-btn-box" :disabled="!canSubmit" :type="canSubmit?'primary':'default'" @click="submit">完成</button>
-		</uni-forms>
+		<view class="forms">
+			<view class="myinput">
+				<u-icon name="phone" color="#2979ff" size="26"></u-icon>
+				<input class="passinput" :disabled="lock" placeholder="请输入手机号" placeholder-style="color:#A1A1A1;font-size:30rpx" type="number" v-model="formData.phone" maxlength="11"/>
+			</view>
+			<view  class="myinput" style="justify-content: space-between;">
+				<view style="display: flex;align-items: ">
+					<u-icon name="error-circle" color="#2979ff" size="25"></u-icon>
+					<input class="passinput" placeholder="请输入验证码" type="number" placeholder-style="color:#A1A1A1;font-size:30rpx" v-model="formData.code" maxlength="6"/>
+				</view>
+				<lysendsmscode ref="shortCode" :phone="formData.phone"></lysendsmscode>
+			</view>
+			<view  class="myinput">
+				<u-icon name="lock" color="#2979ff" size="26"></u-icon>
+				<input class="passinput" placeholder="请输入新密码" type="password" placeholder-style="color:#A1A1A1;font-size:30rpx" v-model="formData.pwd" />
+			</view>
+			<view  class="myinput">
+				<u-icon name="lock" color="#2979ff" size="26"></u-icon>
+				<input class="passinput" placeholder="请确认新密码" type="password" placeholder-style="color:#A1A1A1;font-size:30rpx" v-model="formData.pwd2" />
+			</view>
+		</view>
+		<button class="send-btn-box" type="primary" @click="$stopRepeatClick(submit,'')">确认</button>
 	</view>
 </template>
 
@@ -38,67 +34,13 @@
 		data() {
 			return {
 				lock:false,
+				noClick:true,
 				formData: {
 					"phone": "",
 					"code":"",
 					'pwd': '',
 					'pwd2': ''
 				},
-				rules: {
-					phone: {
-						rules: [{
-								required: true,
-								errorMessage: "请输入手机号",
-							},
-							{
-								pattern: /^1\d{10}$/,
-								errorMessage: "手机号格式错误",
-							}
-						]
-					},
-					code: {
-						rules: [{
-								required: true,
-								errorMessage: "请输入验证码",
-							},
-							{
-								pattern: /^.{6}$/,
-								errorMessage: "请输入6位验证码",
-							}
-						]
-					},
-					pwd: {
-						rules: [{
-								required: true,
-								errorMessage:"请输入新密码",
-							},
-							{
-								pattern: /^.{6,20}$/,
-								errorMessage: "密码为6 - 20位",
-							}
-						]
-					},
-					pwd2: {
-						rules: [{
-								required: true,
-								errorMessage:"请确认密码",
-							},
-							{
-								pattern: /^.{6,20}$/,
-								errorMessage: "密码为6 - 20位",
-							},
-							{
-								validateFunction: function(rule, value, data, callback) {
-									// console.log(value);
-									if (value != data.pwd) {
-										callback('两次输入密码不一致')
-									};
-									return true
-								}
-							}
-						]
-					}
-				}
 			}
 		},
 		computed: {
@@ -138,16 +80,28 @@
 			 */
 			submit() {
 				console.log("formData",this.formData);
-				console.log('rules',this.rules);
-				this.$refs.form.validate()
-					.then(res => {
-						let params={
-							"mobile": this.formData.phone,
-							"code": this.formData.code,
-							"password": this.formData.pwd
-						}
-						//请求重置密码处理
-					})
+				if(!this.isPhone){
+					this.$common.showToast("手机号格式错误")
+					return
+				}
+				if(!this.isCode){
+					this.$common.showToast("请输入6位验证码")
+					return
+				}
+				if(!this.isPwd){
+					this.$common.showToast("密码为6 - 20位")
+					return
+				}
+				if(this.formData.pwd != this.formData.pwd2){
+					this.$common.showToast("两次输入密码不一致")
+					return
+				}
+				let params={
+					"mobile": this.formData.phone,
+					"code": this.formData.code,
+					"password": this.formData.pwd
+				}
+				//请求重置密码处理
 			}
 		}
 	}
@@ -155,70 +109,36 @@
 
 <style scoped>
 	page{
-		background-color: #FFFFFF;
-	}
-	/* #ifndef APP-NVUE */
-	view {
-		display: flex;
-		box-sizing: border-box;
-		flex-direction: column;
-	}
-	
-	/* #endif */
-	
-	.content {
-		padding: 0 50rpx;
-		/* width: 750rpx; */
-		flex: 1;
-	}
-	
-	.input-box {
-		padding: 0 15px;
-		margin-bottom: 10px;
-		background-color: #F8F8F8;
-		border-radius: 6px;
-		font-size: 28rpx;
-	}
-	
-	.get-code {
-		margin: 0;
-		margin-top: 15px;
-		background-color: #007aff;
-		color: #FFFFFF;
-	}
-	
-	.input-box,
-	.get-code {
-		height: 45px;
-		line-height: 45px;
-	}
-	
-	.title {
-		text-align: center;
-		padding-bottom: 5px;
-	}
-	
-	.tip {
-		color: #666666;
-		font-size: 26rpx;
-		margin: 6px 0;
-	}
-	
-	.easyinput {
-		background-color: #F8F8F8;
-		border-radius: 6rpx;
-	}
-	
-	.send-btn {
-		width: 100%;
-		margin-top: 15px;
-		border-radius: 6rpx;
-	}
-	
-	.link {
-		color: #04498c;
+		background-color: #F6F8F8;
 	}
 	.content{
-		padding-top: 36rpx;
+		margin-top: 20rpx;
+	}
+	.forms{
+		display: flex;
+		flex-direction: column;
+		background: #FFFFFF;
+		padding: 40rpx;
+		height: 400rpx;
+	}
+	.myinput{
+		display: flex;
+		align-items: center;
+		padding: 18rpx 0 18rpx 0;
+		border-bottom: #E5E5E5 solid 2rpx;
+	}
+	.passinput{
+		margin-left: 20rpx;
+	}
+	.send-btn-box{
+		/* background: #58968A; */
+		border-radius: 45rpx;
+		height: 90rpx;
+		line-height: 90rpx;
+		margin: 130rpx 40rpx 0 40rpx;
+		font-size: 32rpx;
+		font-family: Source Han Sans CN;
+		font-weight: 500;
+		color: #FFFFFF;
 	}
 </style>

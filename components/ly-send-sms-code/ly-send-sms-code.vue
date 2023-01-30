@@ -54,9 +54,14 @@
 			};
 		},
 		computed: {
-			innerText() {
-				if (this.reverseNumber == 0) return "获取验证码";
-				return "重新发送"+ '('+this.reverseNumber+'s)';
+			innerText:{
+				get: function() {
+					if (this.reverseNumber == 0) return "获取验证码";
+					return "重新发送"+ '('+this.reverseNumber+'s)';
+				},
+				set: function(value) {
+					return value
+				}
 			}
 		},
 		created() {
@@ -82,15 +87,29 @@
 				this.reverseNumber = Number(this.count);
 				this.getCode();
 				this.$emit('getCode');
+				let that = this
 				sendSMS(params).then(res=>{
 					if(res.code===2000){
 						uni.showToast({
 							title: "短信验证码发送成功",
 							icon: 'none'
 						});
-					}else{
-						uni.showModal({
+					}else if(res.code===4000 || res.code===400){
+						that.reverseNumber == 0
+						clearTimeout(that.reverseTimer);
+						that.reverseTimer = null;
+						that.innerText = "获取验证码"
+						uni.showToast({
 							content: res.msg,
+							showCancel: false
+						});
+					}else{
+						that.reverseNumber == 0
+						clearTimeout(that.reverseTimer);
+						that.reverseTimer = null;
+						that.innerText = "获取验证码"
+						uni.showModal({
+							content: "未知错误",
 							showCancel: false
 						});
 					}
@@ -121,7 +140,7 @@ view{
 /* #endif */
 	.short-code-btn {
 		width: 200rpx;
-		height: 85rpx;
+		height: 40rpx;
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */

@@ -1,9 +1,11 @@
-// lybbn-uniapp-----django-vue-lyadmin---django-vue3-lyadmin--mainjs--
+// unielepy-----django-vue-lyadmin----mainjs--
+import stopRepeatClick from './utils/stopRepeatClick.js';
 // #ifndef VUE3
 import Vue from 'vue'
 import App from './App'
 import common from '@/api/common'
 
+Vue.prototype.$stopRepeatClick = stopRepeatClick
 Vue.config.productionTip = false
 
 App.mpType = 'app'
@@ -25,6 +27,7 @@ import { createSSRApp } from 'vue'
 import App from './App.vue'
 export function createApp() {
   const app = createSSRApp(App)
+  app.config.globalProperties.$stopRepeatClick = stopRepeatClick;
   return {
     app
   }
