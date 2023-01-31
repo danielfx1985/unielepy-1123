@@ -1,5 +1,6 @@
 <template>
 	<view class="content">
+		<view style="height: 20rpx;"></view>
 		<view class="forms">
 			<view class="myinput">
 				<u-icon name="phone" color="#2979ff" size="26"></u-icon>
@@ -112,7 +113,8 @@
 		background-color: #F6F8F8;
 	}
 	.content{
-		margin-top: 20rpx;
+		/* margin-top: 20rpx; */
+		font-size: 30rpx;
 	}
 	.forms{
 		display: flex;

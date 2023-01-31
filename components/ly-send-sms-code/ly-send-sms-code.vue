@@ -1,6 +1,6 @@
 <template>
 	<view class="short-code-btn" hover-class="hover" @click="start">
-		<text class="inner-text" :class="reverseNumber==0?'inner-text-active':''">{{innerText}}</text>
+		<text :class="reverseNumber==0?'inner-text-active':'inner-text'">{{codeName}}</text>
 	</view>
 </template>
 
@@ -50,17 +50,23 @@
 		data() {
 			return {
 				reverseNumber: 0,
-				reverseTimer: null
+				reverseTimer: null,
+				codeName:"获取验证码"
 			};
 		},
 		computed: {
 			innerText:{
-				get: function() {
-					if (this.reverseNumber == 0) return "获取验证码";
-					return "重新发送"+ '('+this.reverseNumber+'s)';
+				get() {
+					if (this.reverseNumber == 0){
+						this.codeName = "获取验证码"
+						return this.codeName
+					}
+					this.codeName = "重新发送"+ '('+this.reverseNumber+'s)'
+					return this.codeName
 				},
-				set: function(value) {
-					return value
+				set(value) {
+					this.codeName = value
+					return this.codeName
 				}
 			}
 		},
@@ -75,11 +81,15 @@
 				})
 			},
 			sendMsg() {
+				this.$common.showLoading("正在获取验证码")
 				let reg_phone = /^1\d{10}$/;
-				if(!reg_phone.test(this.phone))return uni.showToast({
-					title: "手机号格式错误",
-					icon: 'none'
-				});
+				if(!reg_phone.test(this.phone)){
+					uni.hideLoading();
+					return uni.showToast({
+						title: "手机号格式错误",
+						icon: 'none'
+					});
+				}
 				let params = {
 					"mobile": this.phone,
 					"type": this.codeType
@@ -89,31 +99,34 @@
 				this.$emit('getCode');
 				let that = this
 				sendSMS(params).then(res=>{
+					uni.hideLoading();
 					if(res.code===2000){
 						uni.showToast({
-							title: "短信验证码发送成功",
+							title: "验证码发送成功",
 							icon: 'none'
 						});
 					}else if(res.code===4000 || res.code===400){
-						that.reverseNumber == 0
-						clearTimeout(that.reverseTimer);
-						that.reverseTimer = null;
-						that.innerText = "获取验证码"
+						that.resetCode()
 						uni.showToast({
 							content: res.msg,
 							showCancel: false
 						});
 					}else{
-						that.reverseNumber == 0
-						clearTimeout(that.reverseTimer);
-						that.reverseTimer = null;
-						that.innerText = "获取验证码"
+						that.resetCode()
 						uni.showModal({
 							content: "未知错误",
 							showCancel: false
 						});
 					}
 				})
+			},
+			resetCode(){
+				if(this.reverseTimer) {
+					clearInterval(this.reverseTimer)
+					this.reverseTimer = null
+				}
+				this.innerText = "获取验证码"
+				this.reverseNumber =0
 			},
 			getCode() {
 				if (this.reverseNumber == 0) {
@@ -140,18 +153,21 @@ view{
 /* #endif */
 	.short-code-btn {
 		width: 200rpx;
-		height: 40rpx;
+		height: 54rpx;
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
 		justify-content: center;
 		align-items: center;
+		background-color: #007aff;
+		border-radius: 27rpx;
 	}
 	.inner-text {
-		font-size: 28rpx;
+		font-size: 26rpx;
 		color: #AAAAAA;
 	}
 	.inner-text-active {
-		color: #007aff;
+		font-size: 26rpx;
+		color: #FFFFFF;
 	}
 </style>
