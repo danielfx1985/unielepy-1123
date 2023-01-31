@@ -1,7 +1,7 @@
 <template>
 	<view class="login">
 		<!--顶部返回按钮-->
-		<text class="back-btn iconfont iconzuo" @tap="navBack"></text>
+		<text class="back-btn iconfont icon-angle-left" @tap="navBack" v-if="showBack"></text>
 		<view class="login-top bg-active">
 			<image class="login-pic" src="/static/unielepystatic/logo.png"></image>
 		</view>
@@ -149,6 +149,7 @@
 		},
 		data() {
 			return {
+				showBack:false,//显示返回箭头按钮
 				loginParams: {
 					mobile: '',
 					code: '',
@@ -162,7 +163,6 @@
 				},
 				btnLoading: false,
 				reqBody: {},
-				codeSeconds: 0, // 验证码发送时间间隔
 				loginByPass: true,
 				smsCodeBtnDisabled: true,
 				userInfo: null,
@@ -227,10 +227,10 @@
 		position: absolute;
 		left: 40rpx;
 		z-index: 9999;
-		// padding-top: var(--status-bar-height);
+		padding-top: 20rpx;
 		top: 40rpx;
 		font-size: 48rpx;
-		color: #fff;
+		color: #2979ff;
 	}
 	.login-top {
 		height: 460rpx;
