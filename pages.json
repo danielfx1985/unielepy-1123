@@ -73,6 +73,20 @@
 				"navigationStyle":"custom",
 				"navigationBarTitleText": ""
 			}
+		},
+		{
+			"path": "pages/message/notice",
+			"style": {
+				"navigationBarTitleText": "我的消息",
+				"enablePullDownRefresh":true,//下拉刷新
+				"onReachBottomDistance": 60
+			}
+		},
+		{
+		"path": "pages/message/noticedetail",//首页路径
+		"style": {
+			"navigationBarTitleText": "消息详情"//顶部字体显示
+			}
 		}
 		
 	],

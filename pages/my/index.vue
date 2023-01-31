@@ -13,7 +13,7 @@
 		</view>
 		<view class="lylist">
 			<view class="lyli">
-				<view class="lycommon" @click="navTo('')">
+				<view class="lycommon" @click="navTo('/pages/message/notice')">
 					<view class="pic">
 						<u-icon name="bell"  size="30"></u-icon>
 						<!-- <image src="../../static/cy-my/qianbao.png" style="width: 40rpx;" mode="widthFix"></image> -->
@@ -34,8 +34,8 @@
 					</view>
 				</view>
 			</view>
-			<view class="lyli">
-				<view class="lycommon">
+			<view class="lyli2">
+				<view class="lycommon" @click="logout">
 					<view class="pic">
 						<u-icon name="share-square"  size="30"></u-icon>
 						<!-- <image src="../../static/cy-my/dingdan.png" style="width: 35rpx;" mode="widthFix"></image> -->
@@ -68,6 +68,9 @@
 			navTo(url) {
 				uni.navigateTo({ url });
 			},
+			logout(){
+				uni.showToast({ title: '点击了退出登录按钮' });
+			}
 		}
 	}
 </script>
@@ -126,7 +129,7 @@
 	.lylist {
 		overflow: hidden;
 		padding: 0 30rpx;
-		padding-top: 30rpx;
+		padding-top: 10rpx;
 		padding-bottom: 100rpx;
 	}
 
@@ -136,10 +139,29 @@
 		position: relative;
 		border-bottom: 1px solid rgb(242, 242, 242);
 	}
+	.lylist .lyli2 {
+		padding: 30rpx 0;
+		overflow: hidden;
+		position: relative;
+		border-bottom: 1px solid rgb(242, 242, 242);
+	}
 
 	.lylist .lyli .pic {
 		float: left;
-		margin-right: 20rpx;
+		margin-right: 30rpx;
+	}
+	.lylist .lyli2 .pic {
+		float: left;
+		margin-right: 30rpx;
+	}
+	.lylist .lyli2 .txt {
+		overflow: hidden;
+		font-size: 30rpx;
+		font-family: Source Han Sans CN;
+		font-weight: 400;
+		color: #333333;
+		padding-bottom: 10rpx;
+		/* border-bottom: 1px solid rgb(242, 242, 242); */
 	}
 
 	.lylist .lyli .txt {
