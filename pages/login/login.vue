@@ -136,8 +136,12 @@
 				</block>
 			</view>
 		</view>
-    <view class="login-type-bottom text-active">
-      {{ appName }} 版权所有
+    <view class="login-type-bottom">
+		<view class="line">
+			<!-- <image :src="isAgree?'../../static/img/login/checked.png':'../../static/img/login/nochecked.png'" @click="handleIsAgree" style="width: 30rpx;height: 30rpx;margin-right: 12rpx;"></image> -->
+			<!-- <checkbox value="checked" :checked="isAgree" style="transform:scale(0.6)" color="#2979ff"/> -->注册即同意
+			<navigator :url="protocolPath" class="path" hover-class="navigator-hover">《用户协议》</navigator><navigator :url="policyPath"class="path" hover-class="navigator-hover">《隐私协议》</navigator>
+		</view>
     </view>
 	</view>
 </template>
@@ -150,6 +154,9 @@
 		data() {
 			return {
 				showBack:false,//显示返回箭头按钮
+				protocolPath:'/pages/content/richtextonline?type=userxieyi&name=用户协议',
+				policyPath:'/pages/content/richtextonline?type=privatexieyi&name=隐私协议',
+				isAgree:false,//协议是否勾选
 				loginParams: {
 					mobile: '',
 					code: '',
@@ -182,6 +189,13 @@
 			this.tabCurrentIndex = parseInt(options.type || 0, 10);
 		},
 		methods: {
+			handleIsAgree(){
+				if(this.isAgree){
+					this.isAgree = false
+				}else{
+					this.isAgree = true
+				}
+			},
 			// 切换登录方式
 			showLoginBySmsCode() {
 				this.loginByPass = !this.loginByPass;
@@ -318,10 +332,21 @@
 		}
 	}
 	.login-type-bottom {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 100%;
 		padding-bottom: 30rpx;
 		text-align: center;
-		font-size: 32rpx;
+		font-size: 24rpx;
+		.line{
+			display: flex;
+			align-items: center;
+			.path {
+				color: #2979ff;
+				text-align: center;
+			}
+		}
 	}
     // 发送验证码样式
     .input-item-sms-code {

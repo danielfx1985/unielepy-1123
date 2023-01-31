@@ -25,6 +25,25 @@
 			}
 		},
 		{
+			"path": "pages/content/webview", //路径
+			"style": {
+				"navigationBarTitleText": "unielepy" //顶部字体显示
+			}
+		},
+		{
+			"path": "pages/content/richtext", //路径
+			"style": {
+				"navigationBarTitleText": "详情" //顶部字体显示
+			}
+		},
+		{
+			"path": "pages/content/richtextonline", //路径
+			"style": {
+				"navigationBarTitleText": "unielepy" //顶部字体显示
+				// "navigationBarBackgroundColor": "#15122D",//颜色
+			}
+		},
+		{
 			"path": "pages/invite/invite",
 			"style": {
 				"navigationStyle": "custom",
