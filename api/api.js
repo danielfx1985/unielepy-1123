@@ -1,6 +1,8 @@
 import {ajaxGet,ajaxPost,ajaxDelete,ajaxPut,ajaxPatch,chooseUploadImg,uploadImg} from './request';
+
 // app检测更新
 export const upgradeApp = params => ajaxPost({url: `app/checkversion/`,params})
+
 // 用户微信手机号登录
 export const xcxMobilelogin = params => ajaxPost({url: `xcx/mobilelogin/`,params})
 
@@ -45,5 +47,8 @@ export const setdefaultAddress = params => ajaxPost({url: `xcx/setdefaultaddress
 
 //我的地址-新增地址\编辑地址
 export const addeditAddress = params => ajaxPost({url: `xcx/addeditaddress/`,params})
+
+// 选择并图像上传(直接上传头像)
+export const xcxChooseUploadAvatar = params => chooseUploadImg({url: `xcx/changeavatar/`,params})
 
 

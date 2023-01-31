@@ -3,7 +3,7 @@
 		<view class="lyheader">
 			<!-- <view class="lynavbar">我的</view> -->
 			<u-navbar title="个人中心" :titleStyle='{color:"#202020",fontWeight:"bold",fontSize:"30rpx"}' :autoBack="false" bgColor="transparent" leftIcon=" "></u-navbar>
-			<view class="lyuser">
+			<view class="lyuser" @click="navTo('/pages/my/myinfo')">
 				<view class="lyuser-left">
 					<image class="lyavatar" src="/static/unielepystatic/img/lycenter/defaultAvatarUrlgrey.png"></image>
 					<text class="lynickname">{{userinfo.nickname}}</text>
@@ -30,7 +30,18 @@
 						<!-- <image src="../../static/cy-my/dingdan.png" style="width: 35rpx;" mode="widthFix"></image> -->
 					</view>
 					<view class="txt">
-						<text>个人设置</text>
+						<text>系统设置</text>
+					</view>
+				</view>
+			</view>
+			<view class="lyli">
+				<view class="lycommon" @click="navTo('')">
+					<view class="pic">
+						<u-icon name="info-circle"  size="30"></u-icon>
+						<!-- <image src="../../static/cy-my/dingdan.png" style="width: 35rpx;" mode="widthFix"></image> -->
+					</view>
+					<view class="txt">
+						<text>关于我们</text>
 					</view>
 				</view>
 			</view>
@@ -70,7 +81,20 @@
 			},
 			logout(){
 				uni.showToast({ title: '点击了退出登录按钮' });
-			}
+				getApp().globalData.userinfo = ""
+				this.$common.clearUser()
+				this.$common.linkjump('/pages/index/index',true)
+			},
+			getData() {
+				// //网络请求请去掉以下注释
+				// getUserInfo().then(res=>{
+				// 	if(res.code == 2000) {
+				// 		let data = res.data.data
+				// 		this.userinfo = data
+				// 		getApp().globalData.userinfo = data
+				// 	}
+				// })
+			},
 		}
 	}
 </script>
@@ -105,7 +129,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 40rpx;
+		padding: 40rpx 16rpx 40rpx 40rpx;
 	}
 	.lyuser-left{
 		display: flex;

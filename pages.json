@@ -83,9 +83,17 @@
 			}
 		},
 		{
-		"path": "pages/message/noticedetail",//首页路径
+			"path": "pages/message/noticedetail",//首页路径
+			"style": {
+				"navigationBarTitleText": "消息详情"//顶部字体显示
+			}
+		},
+		{
+		"path": "pages/my/myinfo",//首页路径
 		"style": {
-			"navigationBarTitleText": "消息详情"//顶部字体显示
+				// "navigationStyle": "custom" ,// 隐藏系统导航栏
+				// "navigationBarTextStyle": "black" // 状态栏字体为白色，只能为 white-白色，black-黑色 二选一
+				"navigationBarTitleText": "个人信息"//顶部字体显示
 			}
 		}
 		
