@@ -30,9 +30,9 @@
 	@import '@/static/unielepystatic/customicons.css';
 	@import '@/static/unielepystatic/css/css.css';
 	// 设置整个项目的背景色
-	page {
-		background-color: #f5f5f5;
-	}
+	// page {
+	// 	background-color: #f5f5f5;
+	// }
 	/* #endif */
 	//使用iconfont图标
 	@import '@/static/unielepystatic/font/iconfont.css'; 

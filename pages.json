@@ -1,5 +1,5 @@
 {
-	"pages": [
+	"pages": [//pages数组中第一项表示应用启动页
 		{
 			"path": "pages/index/index",//首页路径
 			"style": {
@@ -66,6 +66,13 @@
 					"animationType": "slide-in-bottom"
 				}
 			}
+		},
+		{
+			"path": "pages/my/index",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": ""
+			}
 		}
 		
 	],
@@ -73,33 +80,29 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "unielepy",
 		"navigationBarBackgroundColor": "#FFFFFF",
-		"backgroundColor": "#F8F8F8",
+		"backgroundColor": "#fff",
 		"app-plus": {
-			"background": "#efeff4"
+			"background": "#fff"
 		}
 	},
 	"tabBar":{//底部导航
 			"color":"#9B9B9B",
 			"selectedColor":"#121212",
-			"borderStyle":"black",
+			"borderStyle":"#D0DBD9",
 			"backgroundColor":"#FFFFFF",
 			"list":[
 				{
 					"pagePath":"pages/index/index",//页面路径
-					"iconPath":"static/unielepystatic/img/tabbar/icon-index-select.png",//未选中tab图标路径
+					"iconPath":"static/unielepystatic/img/tabbar/icon-index-unselect.png",//未选中tab图标路径
 					"selectedIconPath":"static/unielepystatic/img/tabbar/icon-index-select.png",//选中tab图标路径
 					"text":"首页"//tab字体显示
+				},
+				{
+					"pagePath":"pages/my/index",//页面路径
+					"iconPath":"static/unielepystatic/img/tabbar/icon-my-unselect.png",//未选中tab图标路径
+					"selectedIconPath":"static/unielepystatic/img/tabbar/icon-my-select.png",//选中tab图标路径
+					"text":"我的"//tab字体显示
 				}
 			]
-	},
-	"condition" : { //模式配置，仅开发期间生效
-		"current": 0, //当前激活的模式(list 的索引项)
-		"list": [
-			{
-				"name": "", //模式名称
-				"path": "", //启动页面，必选
-				"query": "" //启动参数，在页面的onLoad函数里面得到
-			}
-		]
 	}
 }

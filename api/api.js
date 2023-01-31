@@ -8,10 +8,10 @@ export const xcxMobilelogin = params => ajaxPost({url: `xcx/mobilelogin/`,params
 export const sendSMS = params => ajaxPost({url: `xcx/sendsms/`,params})
 
 // 获取轮播图
-export const getRotationimgs = params => ajaxGet({url: `xcx/getrotationimgs/`,params})
+export const getRotationimgs = params => ajaxGet({url: `getrotationimgs/`,params})
 
 // 获取其他设置
-export const getOtherSettings = params => ajaxGet({url: `xcx/getothersettings/`,params})
+export const getOtherSettings = params => ajaxGet({url: `getothersettings/`,params})
 
 // 消息列表
 export const xcxUsermessages = params => ajaxGet({url: `xcx/usermessages/`,params})

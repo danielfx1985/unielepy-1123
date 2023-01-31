@@ -36,7 +36,9 @@
 		},
 		// 监听页面加载
 		onLoad() {
-			
+		},
+		//分享此页给好友
+		onShareAppMessage() {
 		},
 		created() {
 		},
