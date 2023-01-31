@@ -1,5 +1,6 @@
 <script>
-	import initApp from '@/api/init.js'
+	//app端初始化，打包app时需要升级客户端可启用
+	// import initApp from '@/api/init.js'
 	export default {
 		//全局变量
 		globalData:{
@@ -9,7 +10,8 @@
 		onLaunch: function() {
 			console.log('unielepy已启动')
 			console.log('App Launch')
-			initApp()
+			//app端初始化，打包app时需要升级客户端可启用
+			// initApp()
 		},
 		onShow: function() {
 			console.log('App Show')
@@ -31,11 +33,7 @@
 	page {
 		background-color: #f5f5f5;
 	}
-
 	/* #endif */
-	.example-info {
-		font-size: 14px;
-		color: #333;
-		padding: 10px;
-	}
+	//使用iconfont图标
+	@import '@/static/unielepystatic/font/iconfont.css'; 
 </style>

@@ -1,8 +1,8 @@
 @font-face {
-  font-family: "iconfont"; /* Project id 2738645 */
-  src: url('@/static/unielepystatic/font/iconfont.woff2?t=1628749655812') format('woff2'),
-       url('@/static/unielepystatic/font/iconfont.woff?t=1628749655812') format('woff'),
-       url('@/static/unielepystatic/font/iconfont.ttf?t=1628749655812') format('truetype');
+  font-family: "iconfont"; /* Project id 3873637 */
+  src: url('/static/unielepystatic/font/iconfont.woff2?t=1675134168712') format('woff2'),
+       url('/static/unielepystatic/font/iconfont.woff?t=1675134168712') format('woff'),
+       url('/static/unielepystatic/font/iconfont.ttf?t=1675134168712') format('truetype');
 }
 
 .iconfont {
@@ -13,19 +13,31 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-down:before {
-  content: "\e608";
+.icon-angle-left:before {
+  content: "\e84f";
 }
 
-.icon-password:before {
-  content: "\e607";
+.icon-mobile:before {
+  content: "\e7b3";
 }
 
-.icon-account:before {
-  content: "\e606";
+.icon-safety-certificate:before {
+  content: "\e776";
 }
 
 .icon-search:before {
+  content: "\e8ef";
+}
+
+.icon-iconfontphone:before {
+  content: "\e634";
+}
+
+.icon-Account:before {
+  content: "\e649";
+}
+
+.icon-passwd:before {
   content: "\e605";
 }
 

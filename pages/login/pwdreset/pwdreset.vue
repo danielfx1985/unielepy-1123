@@ -3,22 +3,26 @@
 		<view style="height: 20rpx;"></view>
 		<view class="forms">
 			<view class="myinput">
-				<u-icon name="phone" color="#2979ff" size="26"></u-icon>
+				<text class="iconfont icon-mobile"></text>
+				<!-- <u-icon name="phone" color="#2979ff" size="26"></u-icon> -->
 				<input class="passinput" :disabled="lock" placeholder="请输入手机号" placeholder-style="color:#A1A1A1;font-size:30rpx" type="number" v-model="formData.phone" maxlength="11"/>
 			</view>
-			<view  class="myinput" style="justify-content: space-between;">
+			<view  class="myinput" style="justify-content: space-between;margin-top: 10rpx;">
 				<view style="display: flex;align-items: ">
-					<u-icon name="error-circle" color="#2979ff" size="25"></u-icon>
+					<text class="iconfont icon-safety-certificate"></text>
+					<!-- <u-icon name="error-circle" color="#2979ff" size="25"></u-icon> -->
 					<input class="passinput" placeholder="请输入验证码" type="number" placeholder-style="color:#A1A1A1;font-size:30rpx" v-model="formData.code" maxlength="6"/>
 				</view>
-				<lysendsmscode ref="shortCode" :phone="formData.phone"></lysendsmscode>
+				<lysendsmscode ref="shortCode" :phone="formData.phone" codeType="resetpass"></lysendsmscode>
 			</view>
-			<view  class="myinput">
-				<u-icon name="lock" color="#2979ff" size="26"></u-icon>
+			<view  class="myinput" style="margin-top: 20rpx;">
+				<text class="iconfont icon-passwd"></text>
+				<!-- <u-icon name="lock" color="#2979ff" size="26"></u-icon> -->
 				<input class="passinput" placeholder="请输入新密码" type="password" placeholder-style="color:#A1A1A1;font-size:30rpx" v-model="formData.pwd" />
 			</view>
-			<view  class="myinput">
-				<u-icon name="lock" color="#2979ff" size="26"></u-icon>
+			<view  class="myinput" style="margin-top: 20rpx;">
+				<text class="iconfont icon-passwd"></text>
+				<!-- <u-icon name="lock" color="#2979ff" size="26"></u-icon> -->
 				<input class="passinput" placeholder="请确认新密码" type="password" placeholder-style="color:#A1A1A1;font-size:30rpx" v-model="formData.pwd2" />
 			</view>
 		</view>
@@ -112,6 +116,10 @@
 	page{
 		background-color: #F6F8F8;
 	}
+	.iconfont {
+	  color: #2979ff;
+	  font-size:35rpx;
+	}
 	.content{
 		/* margin-top: 20rpx; */
 		font-size: 30rpx;
@@ -121,7 +129,7 @@
 		flex-direction: column;
 		background: #FFFFFF;
 		padding: 40rpx;
-		height: 400rpx;
+		height: 430rpx;
 	}
 	.myinput{
 		display: flex;

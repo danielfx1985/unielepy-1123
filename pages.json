@@ -1,41 +1,51 @@
 {
 	"pages": [
 		{
-		"path": "pages/index/index",//首页路径
-		"style": {
-			"navigationBarTitleText": "首页",//顶部字体显示
-			"navigationBarBackgroundColor":"#FFFFFF",
-			"navigationBarTextStyle":"black"
-			// "navigationStyle": "custom" // 隐藏系统导航栏
+			"path": "pages/index/index",//首页路径
+			"style": {
+				"navigationBarTitleText": "首页",//顶部字体显示
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
+				// "navigationStyle": "custom" // 隐藏系统导航栏
 			}
 		},
 		{
-		"path": "pages/upgradeapp/upgrade-popup",//app检查更新提示
-		"style": {
-			"disableScroll": true,
-			"app-plus": {
-				"backgroundColorTop": "transparent",
-				"background": "transparent",
-				"titleNView": false,
-				"scrollIndicator": false,
-				"popGesture": "none",
-				"animationType": "fade-in",
-				"animationDuration": 200
-		
+			"path": "pages/upgradeapp/upgrade-popup",//app检查更新提示
+			"style": {
+				"disableScroll": true,
+				"app-plus": {
+					"backgroundColorTop": "transparent",
+					"background": "transparent",
+					"titleNView": false,
+					"scrollIndicator": false,
+					"popGesture": "none",
+					"animationType": "fade-in",
+					"animationDuration": 200
 				}
 			}
 		},
 		{
-		"path": "pages/invite/invite",
-		"style": {
-			"navigationStyle": "custom",
-			"enablePullDownRefresh": false
+			"path": "pages/invite/invite",
+			"style": {
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
-		"path": "pages/login/pwd-reset/pwd-reset",
-		"style": {
-			"navigationBarTitleText": "重置密码"
+			"path": "pages/login/pwdreset/pwdreset",
+			"style": {
+				"navigationBarTitleText": "重置密码"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录注册",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-bottom"
+				}
 			}
 		}
 		
