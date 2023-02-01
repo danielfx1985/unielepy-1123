@@ -51,4 +51,7 @@ export const addeditAddress = params => ajaxPost({url: `xcx/addeditaddress/`,par
 // 选择并图像上传(直接上传头像)
 export const xcxChooseUploadAvatar = params => chooseUploadImg({url: `xcx/changeavatar/`,params})
 
+// 修改昵称
+export const setNickname = params => ajaxPost({url: `xcx/setnickname/`,params})
+
 

@@ -26,14 +26,11 @@
 	/*每个页面公共css */
 	@import '@/uni_modules/uni-scss/index.scss';
 	@import "@/uni_modules/uview-ui/index.scss";  
-	/* #ifndef APP-NVUE */
-	@import '@/static/unielepystatic/customicons.css';
-	@import '@/static/unielepystatic/css/css.css';
+	@import '@/static/unielepystatic/css/common.scss';
 	// 设置整个项目的背景色
-	// page {
-	// 	background-color: #f5f5f5;
-	// }
-	/* #endif */
+	page {
+		background-color:$uni-bg-color;
+	}
 	//使用iconfont图标
 	@import '@/static/unielepystatic/font/iconfont.css'; 
 </style>

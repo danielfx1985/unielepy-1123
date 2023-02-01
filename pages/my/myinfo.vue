@@ -3,7 +3,7 @@
 		<!-- <u-navbar leftText="个人信息" class="leftext" size="30"   :autoBack="true" :bgColor="bgColor">
 		</u-navbar> -->
 		<view class="info-container" >
-			<view style="height: 20rpx;background-color: #F6F8F8;"></view>
+			<view class="lygap20-bg"></view>
 			<view class="info-item" @click="changeAvatar">
 				<text>头像</text>
 				<view class="info-item-right">
@@ -11,7 +11,7 @@
 					<image src="/static/unielepystatic/img/public/arrow-right.png" class="u-tou-right-jiantou"></image>
 				</view>
 			</view>
-			<view class="info-item" @click="jumpto('/pages/personal/setnick?nickname='+userInfo.nickname)">
+			<view class="info-item" @click="jumpto('/pages/my/setnick?nickname='+userInfo.nickname)">
 				<text>昵称</text>
 				<view class="info-item-right">
 					<text>{{userInfo.nickname}}</text>
@@ -80,11 +80,6 @@
 		},
 	}
 </script>
-<style>
-page{
-		background: #F6F8F8;
-	}	
-</style>
 <style lang="scss" scoped>
 	.info-container{	
 		background: #fff;

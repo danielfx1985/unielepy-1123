@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<view style="height: 20rpx;background-color: #F6F8F8;"></view>
+		<view class="lygap20-bg"></view>
 		<ul class="mess-list">
 			<li v-for="(item,index) in tableData" :key="index" @click="jumptoNoticeDetail(item)">
 				<view class="leftnotice">
@@ -96,6 +96,11 @@
 		},
 	}
 </script>
+<style>
+	page {
+		background-color: #fff;
+	}
+</style>
 <style lang="scss" scoped>
 	.container{
 		background: #FFFFFF;

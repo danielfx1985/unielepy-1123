@@ -15,7 +15,7 @@
 			<view class="lyli">
 				<view class="lycommon" @click="navTo('/pages/message/notice')">
 					<view class="pic">
-						<u-icon name="bell"  size="30"></u-icon>
+						<u-icon name="bell"  size="28"></u-icon>
 						<!-- <image src="../../static/cy-my/qianbao.png" style="width: 40rpx;" mode="widthFix"></image> -->
 					</view>
 					<view class="txt">
@@ -26,7 +26,7 @@
 			<view class="lyli">
 				<view class="lycommon" @click="navTo('')">
 					<view class="pic">
-						<u-icon name="setting"  size="30"></u-icon>
+						<u-icon name="setting"  size="28"></u-icon>
 						<!-- <image src="../../static/cy-my/dingdan.png" style="width: 35rpx;" mode="widthFix"></image> -->
 					</view>
 					<view class="txt">
@@ -37,7 +37,7 @@
 			<view class="lyli">
 				<view class="lycommon" @click="navTo('')">
 					<view class="pic">
-						<u-icon name="info-circle"  size="30"></u-icon>
+						<u-icon name="info-circle"  size="28"></u-icon>
 						<!-- <image src="../../static/cy-my/dingdan.png" style="width: 35rpx;" mode="widthFix"></image> -->
 					</view>
 					<view class="txt">
@@ -184,7 +184,7 @@
 		font-family: Source Han Sans CN;
 		font-weight: 400;
 		color: #333333;
-		padding-bottom: 10rpx;
+		padding-bottom: 6rpx;
 		/* border-bottom: 1px solid rgb(242, 242, 242); */
 	}
 
@@ -194,7 +194,7 @@
 		font-family: Source Han Sans CN;
 		font-weight: 400;
 		color: #333333;
-		padding-bottom: 10rpx;
+		padding-bottom: 6rpx;
 		/* border-bottom: 1px solid rgb(242, 242, 242); */
 	}
 
