@@ -7,6 +7,22 @@
 				</swiper-item>
 			</swiper>
 		</view>
+		<view class="lytabgrid">
+			<view class="idx-title">
+				<span>功能展示</span>
+			</view>
+			<u-grid :border="false" col="4">
+				<u-grid-item v-for="(listItem,listIndex) in tabList" :key="listIndex" @click="tabclick">
+					<u-icon
+						:customStyle="{paddingTop:20+'rpx'}"
+						:name="listItem.name"
+						:size="26"
+					></u-icon>
+					<text class="lygrid-text">{{listItem.title}}</text>
+				</u-grid-item>
+			</u-grid>
+		</view>
+		<u-toast ref="lyToast" />
 	</view>
 </template>
 
@@ -32,6 +48,32 @@
 					page:1,
 					limit:10
 				},
+				tabList: [{
+						name: 'account',
+						title: '登录/注册'
+					},
+					{
+						name: 'lock',
+						title: '密码重置'
+					},
+					{
+						name: 'download',
+						title: '邀请下载'
+					},
+					{
+						name: 'bell',
+						title: '公告通知'
+					},
+					{
+						name: 'home',
+						title: '首页'
+					},
+					{
+						name: 'level',
+						title: '个人中心'
+					},
+				],
+				
 			}
 		},
 		// 监听页面加载
@@ -52,6 +94,20 @@
 			uni.stopPullDownRefresh()
 		},
 		methods: {
+			tabclick(name) {
+				if(name == 0){
+					this.$common.linkjump("/pages/login/login?showBack=true")
+				}else if(name == 1){
+					this.$common.linkjump("/pages/login/pwdreset/pwdreset")
+				}else if(name == 2){
+					this.$common.linkjump("/pages/invite/invite")
+				}else if(name == 3){
+					this.$common.linkjump("/pages/message/notice")
+				}else if(name == 5){
+					this.$common.linkjump("/pages/my/index",true)
+				}
+				// this.$refs.lyToast.success(`点击了第${name}个`)
+			},
 			//轮播图获取数据
 			getLunBo() {
 				var params = {
@@ -98,7 +154,6 @@
 	.container {
 		font-size: 14px;
 		line-height: 24px;
-		background: #FFFFFF;
 	}
 	.home-swiper{
 		swiper{
@@ -114,5 +169,17 @@
 	}
 	.home-swiper ::v-deep .swiper-dot-active{
 		background: rgba(255,255,255,1) !important;
+	}
+	.lytabgrid{
+		margin-top: 20rpx;
+		background: #fff;
+	}
+	.lygrid-text {
+		font-size: 14px;
+		color: #909399;
+		padding: 10rpx 0 20rpx 0rpx;
+		/* #ifndef APP-PLUS */
+		box-sizing: border-box;
+		/* #endif */
 	}
 </style>

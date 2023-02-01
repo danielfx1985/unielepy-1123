@@ -2,20 +2,20 @@
 	<view class="mypage">
 		<view class="lyheader">
 			<!-- <view class="lynavbar">我的</view> -->
-			<u-navbar title="个人中心" :titleStyle='{color:"#202020",fontWeight:"bold",fontSize:"30rpx"}' :autoBack="false" bgColor="transparent" leftIcon=" "></u-navbar>
+			<u-navbar title="个人中心" :titleStyle='{color:"black",fontWeight:"700",fontSize:"32rpx"}' :autoBack="false" bgColor="transparent" leftIcon=" "></u-navbar>
 			<view class="lyuser" @click="navTo('/pages/my/myinfo')">
 				<view class="lyuser-left">
 					<image class="lyavatar" src="/static/unielepystatic/img/lycenter/defaultAvatarUrlgrey.png"></image>
 					<text class="lynickname">{{userinfo.nickname}}</text>
 				</view>
-				<u-icon name="arrow-right"  size="20"></u-icon>
+				<u-icon name="arrow-right" size="20"></u-icon>
 			</view>
 		</view>
 		<view class="lylist">
 			<view class="lyli">
 				<view class="lycommon" @click="navTo('/pages/message/notice')">
 					<view class="pic">
-						<u-icon name="bell"  size="28"></u-icon>
+						<u-icon name="bell"  size="26"></u-icon>
 						<!-- <image src="../../static/cy-my/qianbao.png" style="width: 40rpx;" mode="widthFix"></image> -->
 					</view>
 					<view class="txt">
@@ -26,7 +26,7 @@
 			<view class="lyli">
 				<view class="lycommon" @click="navTo('')">
 					<view class="pic">
-						<u-icon name="setting"  size="28"></u-icon>
+						<u-icon name="setting"  size="26"></u-icon>
 						<!-- <image src="../../static/cy-my/dingdan.png" style="width: 35rpx;" mode="widthFix"></image> -->
 					</view>
 					<view class="txt">
@@ -37,7 +37,7 @@
 			<view class="lyli">
 				<view class="lycommon" @click="navTo('')">
 					<view class="pic">
-						<u-icon name="info-circle"  size="28"></u-icon>
+						<u-icon name="info-circle"  size="26"></u-icon>
 						<!-- <image src="../../static/cy-my/dingdan.png" style="width: 35rpx;" mode="widthFix"></image> -->
 					</view>
 					<view class="txt">
@@ -48,7 +48,7 @@
 			<view class="lyli2">
 				<view class="lycommon" @click="logout">
 					<view class="pic">
-						<u-icon name="share-square"  size="30"></u-icon>
+						<u-icon name="share-square"  size="26"></u-icon>
 						<!-- <image src="../../static/cy-my/dingdan.png" style="width: 35rpx;" mode="widthFix"></image> -->
 					</view>
 					<view class="txt">
@@ -180,7 +180,7 @@
 	}
 	.lylist .lyli2 .txt {
 		overflow: hidden;
-		font-size: 30rpx;
+		font-size: 32rpx;
 		font-family: Source Han Sans CN;
 		font-weight: 400;
 		color: #333333;
@@ -190,7 +190,7 @@
 
 	.lylist .lyli .txt {
 		overflow: hidden;
-		font-size: 30rpx;
+		font-size: 32rpx;
 		font-family: Source Han Sans CN;
 		font-weight: 400;
 		color: #333333;

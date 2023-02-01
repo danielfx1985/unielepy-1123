@@ -6,7 +6,33 @@
 /* 背景色 */
 $ly-bg-color: #F6F8F8;
 
+.lygbc{
+	background-color:$ly-bg-color;
+}
+
 .lygap20-bg{
 	height: 20rpx;
 	background-color:$ly-bg-color;
+}
+
+.idx-title{
+	display: flex;
+	align-items: center;// 垂直居中
+	padding-top: 20rpx;
+	padding-left: 40rpx;
+	box-sizing: border-box;
+	font-size: 30rpx;
+	font-weight:bold;
+	color: #333333;
+	position: relative;
+	&:before{
+		position: absolute;
+		left:20rpx;
+		top: 30rpx;
+		content:'';
+		width: 6rpx;
+		height: 30rpx;
+		background: #155FF6;
+		border-radius: 3rpx;
+	}
 }

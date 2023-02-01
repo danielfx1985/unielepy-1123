@@ -187,6 +187,7 @@
 		},
 		onLoad(options) {
 			this.tabCurrentIndex = parseInt(options.type || 0, 10);
+			this.showBack = options.showBack || false
 		},
 		methods: {
 			handleIsAgree(){
@@ -243,7 +244,7 @@
 		z-index: 9999;
 		padding-top: 20rpx;
 		top: 40rpx;
-		font-size: 48rpx;
+		font-size: 38rpx;
 		color: #2979ff;
 	}
 	.login-top {

@@ -118,7 +118,7 @@
 	}
 	.iconfont {
 	  color: #2979ff;
-	  font-size:35rpx;
+	  font-size:38rpx;
 	}
 	.content{
 		/* margin-top: 20rpx; */
