@@ -224,10 +224,12 @@
 		}
 	};
 </script>
-<style lang="scss" scoped>
+<style>
 	page {
 		background: #fff;
 	}
+</style>
+<style lang="scss" scoped>
 	.login {
 		width: 100%;
 		position: relative;

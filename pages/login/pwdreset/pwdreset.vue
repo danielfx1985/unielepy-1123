@@ -8,7 +8,7 @@
 				<input class="passinput" :disabled="lock" placeholder="请输入手机号" placeholder-style="color:#A1A1A1;font-size:30rpx" type="number" v-model="formData.phone" maxlength="11"/>
 			</view>
 			<view  class="myinput" style="justify-content: space-between;margin-top: 10rpx;">
-				<view style="display: flex;align-items: ">
+				<view style="display: flex;align-items:center;">
 					<text class="iconfont icon-safety-certificate"></text>
 					<!-- <u-icon name="error-circle" color="#2979ff" size="25"></u-icon> -->
 					<input class="passinput" placeholder="请输入验证码" type="number" placeholder-style="color:#A1A1A1;font-size:30rpx" v-model="formData.code" maxlength="6"/>
