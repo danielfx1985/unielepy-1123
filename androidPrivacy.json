@@ -6,12 +6,19 @@
     "buttonAccept" : "同意并接受",
     "buttonRefuse" : "暂不同意",
     "hrefLoader" : "system|default",
+	"backToExit":"true",
     "second" : {
         "title" : "确认提示",
         "message" : "　　进入应用前，你需先同意<a href=\"https://www.xxxx.com/index2.html\" >《用户协议》</a>和<a href=\"https://www.xxxx.com/index1.html\">《隐私政策》</a>，否则将退出应用。",
         "buttonAccept" : "同意并继续",
         "buttonRefuse" : "退出应用"
     },
+	"disagreeMode":{
+	    "support": false,
+	    "loadNativePlugins": false,
+	    "visitorEntry": false,
+	    "showAlways": false 
+	},
     "styles" : {
         "backgroundColor" : "#ffffff",
         "borderRadius" : "5px",

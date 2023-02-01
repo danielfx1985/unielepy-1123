@@ -16,6 +16,8 @@ unielepy 框架是使用uniapp配套django-vue-lyadmin使用的快速开发框�
 
 ## 在线体验
 
+[unielepy](https://www.pgyer.com/3Y1a) android app下载体验
+
 1.  Eleunipy在线模板系统：[https://eleunipy.lybbn.cn/](https://eleunipy.lybbn.cn/)
 
 插件/组件/源码 陆续更新中...

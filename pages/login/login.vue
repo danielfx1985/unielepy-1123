@@ -242,9 +242,9 @@
 		position: absolute;
 		left: 40rpx;
 		z-index: 9999;
-		padding-top: 20rpx;
-		top: 40rpx;
-		font-size: 38rpx;
+		padding-top: 30rpx;
+		top: 50rpx;
+		font-size: 40rpx;
 		color: #2979ff;
 	}
 	.login-top {

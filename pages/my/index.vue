@@ -98,11 +98,12 @@
 		}
 	}
 </script>
-
-<style scoped>
+<style>
 	page{
 		background-color: #fff;
 	}
+</style>
+<style scoped>
 	.mypage{
 		
 	}
