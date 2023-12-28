@@ -7,9 +7,9 @@
 				</swiper-item>
 			</swiper>
 		</view>
-		<view class="lytabgrid">
+		<view class="lytabgrid">Q
 			<view class="idx-title">
-				<span>功能展示</span>
+				<span>功能展示Q</span>
 			</view>
 			<u-grid :border="false" col="4">
 				<u-grid-item v-for="(listItem,listIndex) in tabList" :key="listIndex" @click="tabclick">
